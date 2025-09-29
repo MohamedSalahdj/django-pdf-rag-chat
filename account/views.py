@@ -12,7 +12,7 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data) #
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
@@ -29,6 +29,7 @@ class RegisterView(generics.CreateAPIView):
             "user": user_data,
             "tokens": tokens
         }, status=status.HTTP_201_CREATED)
-    
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
