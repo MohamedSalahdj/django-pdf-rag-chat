@@ -1,0 +1,17 @@
+# Python cache and temp files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VSCode settings (optional)
+.vscode/
+
+# Virtual environment
+.venv/
+env/
+
+# Dotenv environment variables file
+.env
+
+# SQLite database 
+db.sqlite3
