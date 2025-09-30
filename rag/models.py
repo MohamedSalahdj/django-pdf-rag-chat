@@ -6,7 +6,7 @@ class UploadedPDF(models.Model):
     title = models.CharField(max_length=75, blank=True)
     file = models.FileField(upload_to='documents/pdfs/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    indexed = models.BooleanField(default=False)
+    is_indexed = models.BooleanField(default=False)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
