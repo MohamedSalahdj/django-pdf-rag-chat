@@ -15,3 +15,6 @@ env/
 
 # SQLite database 
 db.sqlite3
+
+# ChromaDB persistent storage
+chroma_db/
