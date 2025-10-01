@@ -1,4 +1,7 @@
+import logging
 import PyPDF2
+
+logger = logging.getLogger(__name__)
 
 
 def extract_text_from_pdf(file_path):
@@ -12,14 +15,21 @@ def extract_text_from_pdf(file_path):
         str: Extracted text from the PDF.
     """
     text = []
-    with open(file_path, 'rb') as pdf_file:
-        reader = PyPDF2.PdfReader(pdf_file)
-        for page in reader.pages:
-            content = page.extract_text()
-            if content:
-                text.append(content)
+    
+    try:
+        with open(file_path, 'rb') as pdf_file:
+            reader = PyPDF2.PdfReader(pdf_file)
+            
+            for page in reader.pages:
+                content = page.extract_text()
+                if content:
+                    text.append(content)
         
-    return "\n".join(text)
+        return "\n".join(text)
+        
+    except Exception as e:
+        logger.error(f"Error extracting text from PDF {file_path}: {str(e)}", exc_info=True)
+        raise
 
 
 def chunk_text(text, chunk_size=500):
