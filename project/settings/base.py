@@ -5,6 +5,7 @@ Contains common settings shared across all environments.
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -65,6 +66,13 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+# JWT Configuration - Token Lifetimes
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # 30 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),     # 7 days
+    "UPDATE_LAST_LOGIN": True,                       
 }
 
 # Database
