@@ -10,8 +10,13 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 import os
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
+from dotenv import load_dotenv
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+load_dotenv()
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 
+                      os.getenv("DJANGO_SETTINGS_MODULE", 'project.settings.prod'))
+
 django_asgi_app = get_asgi_application()
 
 
