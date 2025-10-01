@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
@@ -9,6 +10,8 @@ from .serializers import UploadedPDFSerializer
 from .helpers.text_processing import extract_text_from_pdf, chunk_text
 from .helpers.vector_store import embed_texts, get_chroma_collection
 
+logger = logging.getLogger(__name__)
+
 
 class PDFUploadView(APIView):
     permission_classes = [IsAuthenticated]
@@ -17,7 +20,7 @@ class PDFUploadView(APIView):
         serializer = UploadedPDFSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(
-                {"errors": "Invalid data", "details": serializer.errors},
+                {"error": "Invalid data", "details": serializer.errors},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
@@ -28,7 +31,7 @@ class PDFUploadView(APIView):
 
             if not text.strip():
                 return Response(
-                    {"error": "The uploaded PDF is empty"},
+                    {"error": "The uploaded PDF is empty", "details": "No text content found in the PDF file"},
                     status=status.HTTP_400_BAD_REQUEST
                 )
             
@@ -51,10 +54,15 @@ class PDFUploadView(APIView):
             pdf_instance.is_indexed = True
             pdf_instance.save()
 
-            return Response({"status": "success", "pdf_id": pdf_instance.id})
+            return Response({
+                "success": True, 
+                "message": "PDF uploaded and indexed successfully",
+                "data": {"pdf_id": pdf_instance.id, "chunks_count": len(chunks)}
+            })
 
         except Exception as e:
+            logger.error(f"Error processing PDF {pdf_instance.id}: {str(e)}", exc_info=True)
             return Response(
-                {"error": "An internal error occurred", "details": str(e)},
+                {"error": "Internal server error", "details": "Failed to process the PDF file"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
