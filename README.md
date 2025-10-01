@@ -145,14 +145,39 @@ django-pdf-rag-chat/
 └── README.md                 # This documentation
 ```
 
+## 📖 Complete API Documentation
+
+### � Interactive API Documentation
+**[View Complete Postman API Documentation](https://documenter.getpostman.com/view/33316118/2sB3QFSCqa)**
+
+The comprehensive API documentation includes:
+- **Authentication Endpoints**: Registration, login, token refresh
+- **File Upload Endpoints**: PDF upload and document management
+- **Request/Response Examples**: Complete with sample data
+- **Error Handling**: Detailed error responses and codes
+
+#### 🔌 WebSocket API Documentation
+While Postman covers REST APIs, the WebSocket API requires a manual guide.
+- **WebSocket Connection**: Real-time chat integration
+
+#### 📍 Connection
+```bash
+ws://127.0.0.1:8000/api/v1/ws/chat/?token=<access_token>
+```
+- **Protocol**: WebSocket
+- **Authentication**: JWT access_token passed as a query parameter
+
+- 📤 **Sending Messages**:
+```{
+  "query": "What programming languages does Mohamed know?"
+}
+```
 
 ## 🔐 Authentication System Usage
 
 ### JWT Authentication Flow
 
 The API uses JWT (JSON Web Token) based authentication with access and refresh tokens. All endpoints require proper authentication except for registration and login.
-
-**📋 Complete API Documentation:** [View Interactive Postman Documentation](https://documenter.getpostman.com/view/33316118/2sB3QFSCqa)
 
 ### Key Authentication Endpoints
 
@@ -248,18 +273,6 @@ project/settings/
 - Comprehensive logging configuration
 
 
-## 📖 Complete API Documentation
-
-### � Interactive API Documentation
-**[View Complete Postman API Documentation](https://documenter.getpostman.com/view/33316118/2sB3QFSCqa)**
-
-The comprehensive API documentation includes:
-- **Authentication Endpoints**: Registration, login, token refresh
-- **File Upload Endpoints**: PDF upload and document management
-- **WebSocket Connection**: Real-time chat integration
-- **Request/Response Examples**: Complete with sample data
-- **Error Handling**: Detailed error responses and codes
-
 ### API Endpoint Summary
 
 | Category | Endpoint | Method | Description |
@@ -269,7 +282,6 @@ The comprehensive API documentation includes:
 | **Authentication** | `/api/v1/account/token/refresh/` | POST | Refresh access token |
 | **Document Management** | `/api/v1/rag/upload/` | POST | Upload PDF document |
 | **Real-time Chat** | `/api/v1/ws/chat/` | WebSocket | Interactive PDF chat |
-
 
 ---
 
