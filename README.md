@@ -196,6 +196,21 @@ Include the access token in the Authorization header for all protected endpoints
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
+### JWT Token Configuration
+
+The application uses optimized token lifetimes for better user experience:
+
+| Token Type | Lifetime | Purpose |
+|------------|----------|---------|
+| **Access Token** | 30 minutes | API authentication for protected endpoints |
+| **Refresh Token** | 7 days | Generate new access tokens without re-login |
+
+**Token Management:**
+- Access tokens expire after 30 minutes for security
+- Use the refresh token to get new access tokens
+- Refresh tokens are valid for 7 days
+- Last login time is automatically tracked
+
 ## 📄 PDF Upload & RAG Endpoints
 
 ### Available Endpoints
