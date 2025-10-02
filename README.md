@@ -62,7 +62,7 @@ A production-ready real-time chat application that enables users to upload PDF d
 ### Prerequisites
 
 - **Python**: 3.8+ (Tested with 3.12)
-- **Virtual Environment**: venv, virtualenv, or conda
+- **Virtual Environment**: venv or virtualenv
 - **OpenAI API Key**: Required for embeddings and chat completion
 - **Git**: For repository cloning
 
@@ -264,10 +264,6 @@ requirements/
 | `SECRET_KEY` | String | Yes | Auto-generated | Django secret key for cryptographic signing |
 | `OPENAI_API_KEY` | String | **Yes** | None | OpenAI API key for embeddings and chat |
 | `ALLOWED_HOSTS` | CSV String | No | `localhost,127.0.0.1` | Allowed hostnames for Django |
-| `MAX_PDF_SIZE` | Integer | No | `10485760` | Maximum PDF file size in bytes (10MB) |
-| `DATABASE_URL` | String | No | SQLite | Database connection URL (PostgreSQL for production) |
-| `REDIS_URL` | String | No | None | Redis URL for production caching and channels |
-
 
 ### Settings Architecture
 
